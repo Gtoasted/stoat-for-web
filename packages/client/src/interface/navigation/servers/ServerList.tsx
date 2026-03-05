@@ -23,6 +23,7 @@ import { Draggable } from "../../../../components/ui/components/utils/Draggable"
 
 import { Symbol } from "@revolt/ui/components/utils/Symbol";
 import { UserMenu } from "./UserMenu";
+import { useInstance } from "@revolt/instance";
 
 interface Props {
   /**
@@ -70,6 +71,7 @@ export const ServerList = (props: Props) => {
   const client = useClient();
   const navigate = useNavigate();
   const { openModal } = useModals();
+  const instance = useInstance();
 
   const navigateServer = (byOffset: number) => {
     const serverId = props.selectedServer();
@@ -303,7 +305,7 @@ export const ServerList = (props: Props) => {
             <Avatar size={42} fallback={<MdAdd />} />
           </a>
         </Tooltip>
-        <Show when={CONFIGURATION.IS_STOAT}>
+        <Show when={instance.isStoat}>
           <Tooltip placement="right" content={"Find new servers to join"}>
             <a
               href={state.layout.getLastActiveDiscoverPath()}
